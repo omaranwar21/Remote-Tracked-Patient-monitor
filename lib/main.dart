@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'login.dart';
 import 'register.dart';
+import 'reset_password.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +21,7 @@ void main() async {
         routes: {
           'login': (context) => const MyLogin(),
           'register': (context) => const MyRegister(),
+          'reset_password': (context) => const ResetPasswordPage(),
         }),
   );
 }

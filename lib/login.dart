@@ -171,6 +171,8 @@ class _MyLoginState extends State<MyLogin> {
       print('Sign in successful');
 
       // navigate to the next screen
+      Navigator.pushNamed(context, 'home');
+      
     } else {
       // Display an error message or handle empty email/password fields
     }

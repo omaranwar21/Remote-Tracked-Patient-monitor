@@ -149,6 +149,7 @@ class _MyRegisterState extends State<MyRegister> {
             color: Colors.white,
             onPressed: () {
               signInWithEmailAndPassword();
+              Navigator.pushNamed(context, 'login');
             },
             icon: const Icon(Icons.arrow_forward),
           ),
@@ -199,3 +200,4 @@ class _MyRegisterState extends State<MyRegister> {
   }
  }
 }
+

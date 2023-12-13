@@ -42,11 +42,11 @@ class _MyLoginState extends State<MyLogin> {
             child: Column(
               children: [
                 buildEmailTextField(),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 buildPasswordTextField(),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 buildSignInButton(),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 buildOtherOptions(),
               ],
             ),
@@ -99,7 +99,7 @@ class _MyLoginState extends State<MyLogin> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
+        const Text(
           'Sign In',
           style: TextStyle(
             color: Color(0xff4c505b),
@@ -109,7 +109,7 @@ class _MyLoginState extends State<MyLogin> {
         ),
         CircleAvatar(
           radius: 30,
-          backgroundColor: Color(0xff4c505b),
+          backgroundColor: const Color(0xff4c505b),
           child: IconButton(
             color: Colors.white,
             onPressed: () {
@@ -130,7 +130,7 @@ class _MyLoginState extends State<MyLogin> {
           onPressed: () {
             Navigator.pushNamed(context, 'register');
           },
-          child: Text(
+          child: const Text(
             'Sign Up',
             style: TextStyle(
               decoration: TextDecoration.underline,
@@ -144,7 +144,7 @@ class _MyLoginState extends State<MyLogin> {
             // Implement forgot password functionality
             Navigator.pushNamed(context, 'reset_password');
           },
-          child: Text(
+          child: const Text(
             'Forgot Password',
             style: TextStyle(
               decoration: TextDecoration.underline,

@@ -25,7 +25,7 @@ void main() async {
           'register': (context) => const MyRegister(),
           'reset_password': (context) => const ResetPasswordPage(),
           'home': (context) => const HomePage(),
-          'plot': (context) => RealTimePlotting(),
+          'plot': (context) => const RealTimePlotting(),
         }),
   );
 }

@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -38,6 +39,22 @@ class CustomDrawer extends StatelessWidget {
               // Handle sidebar item 2 tap
               Navigator.pop(context); // Close the sidebar
               Navigator.pushNamed(context, 'home');
+            },
+          ),
+          ListTile(
+            title: const Text('Sign Out'),
+            onTap: () {
+              // Handle sidebar item 2 tap
+              Navigator.pop(context); // Close the sidebar
+              Navigator.pushNamed(context, 'login');
+            },
+          ),
+          ListTile(
+            title: const Text('Reset Password'),
+            onTap: () {
+              // Handle sidebar item 2 tap
+              Navigator.pop(context); // Close the sidebar
+              Navigator.pushNamed(context, 'reset_password');
             },
           ),
           // Add more sidebar items as needed

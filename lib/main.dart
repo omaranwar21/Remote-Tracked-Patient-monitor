@@ -14,12 +14,13 @@ void main() async {
     appId: '1:771972734729:android:1ad79451bffcf413747dd8', // Your appId
     messagingSenderId: '771972734729', // Your messagingSenderId
     projectId: 'smarticu-c78aa', // Your projectId
+    databaseURL: 'https://smarticu-c78aa-default-rtdb.firebaseio.com/',
     ),
   );
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: 'login',
+        initialRoute: 'plot',
         routes: {
           'login': (context) => const MyLogin(),
           'register': (context) => const MyRegister(),

@@ -44,7 +44,7 @@ class Ploting extends StatelessWidget {
             width: 1,
           ),
         ),
-        minX: (dataCount.toDouble() - 20),
+        minX: (dataCount.toDouble()-20),
         maxX: dataCount.toDouble(),
         minY: 0,
         maxY: 20,

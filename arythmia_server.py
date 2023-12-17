@@ -6,11 +6,8 @@ from sklearn import preprocessing
 import pickle
 import neurokit2 as nk
 import pandas as pd
+import pyrebase
 
-
-# Load the model using pickle
-with open('trained_model.pkl', 'rb') as file:
-    loaded_model = pickle.load(file)
 
 def extract_features(path):
     ecg_data = pd.read_csv(path) # replace 'ecg_data.csv' with your file path
@@ -68,6 +65,33 @@ def predict(ecg_path):
     ecg_features = ecg_features[['ECG_P_Peaks',	'ECG_T_Peaks',	'ECG_R_Peaks',	'ECG_S_Peaks',	'ECG_Q_Peaks']]
     prediction = loaded_model.predict(ecg_features)
     print(prediction)
+
+
+
+config = {
+  "apiKey": "AIzaSyAPCMW9BEND7-JAJRE-25QipGyGpNFevNE",
+  "authDomain": "smarticu-c78aa.firebaseapp.com",
+  "databaseURL": "https://smarticu-c78aa-default-rtdb.firebaseio.com",
+  "projectId": "smarticu-c78aa",
+  "storageBucket": "smarticu-c78aa.appspot.com",
+  "messagingSenderId": "771972734729",
+  "appId": "1:771972734729:web:a5b49783504a872d747dd8",
+  "measurementId": "G-8RXVDS0ZHR"
+}
+
+
+firebase = pyrebase.initialize_app(config)
+
+storage = firebase.storage()
+
+path_on_cloud = "ecg_file.csv"
+path_local = "./"
+storage.child(path_on_cloud).download(path_local, "ecg.csv")
+
+# Load the model using pickle
+with open('trained_model.pkl', 'rb') as file:
+    loaded_model = pickle.load(file)
+
 
 ecg_path = "ecg.csv"
 predict(ecg_path)

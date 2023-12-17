@@ -16,6 +16,6 @@ firebase = pyrebase.initialize_app(config)
 
 storage = firebase.storage()
 
-path_on_cloud = "ecg_signal.csv"
+path_on_cloud = "ecg_file.csv"
 path_local = "./"
-storage.child(path_on_cloud).download(path_local, "eeg.csv")
+storage.child(path_on_cloud).download(path_local, "ecg.csv")

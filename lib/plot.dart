@@ -7,7 +7,7 @@ import 'ploting.dart';
 import 'realtime.dart';
 
 class RealTimePlotting extends StatefulWidget {
-  const RealTimePlotting({super.key});
+  const RealTimePlotting({Key? key}) : super(key: key);
 
   @override
   RealTimePlottingState createState() => RealTimePlottingState();
@@ -18,43 +18,54 @@ class RealTimePlottingState extends State<RealTimePlotting> {
   int dataCount = 0;
   late double temp; // Declare temp variable
   late RealTime realTime; // Declare RealTime variable
+  late Timer timer; // Declare Timer variable
 
   @override
   void initState() {
     super.initState();
-    temp = 10;
+    temp = 0;
 
-    // Initialize the RealTime widget to listen for temperature updates
-    realTime = RealTime(
-      onTemperatureUpdate: (temperature) {
-        print("Received temperature update: $temperature");
-        setState(() {
-          temp = temperature.toDouble();
-          dataPoints.add(FlSpot(dataCount.toDouble(), temp));
-          dataCount++;
-        });
-      },
-    );
+    //Initialize the timer
+    timer = Timer.periodic(const Duration(milliseconds: 200), _updateData);
+  }
 
-    // Simulate real-time data updates every second
-    Timer.periodic(const Duration(milliseconds: 200), (timer) {
-      setState(() {
-        dataPoints.add(FlSpot(dataCount.toDouble(), temp));
-        dataCount++;
-      });
+  void _updateData(Timer timer) {
+    //print("timer on");
+    setState(() {
+      dataPoints.add(FlSpot(dataCount.toDouble(), temp));
+      dataCount++;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Real-time Ploting"),
+      appBar: CustomAppBar(title: "Real-time Plotting"),
       drawer: const CustomDrawer(),
       body: LayoutBuilder(
         builder: (context, constraints) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Ploting(dataCount: dataCount, dataPoints: dataPoints),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  flex: 30, // Adjust the flex factor to control the ratio
+                  child: Ploting(dataCount: dataCount, dataPoints: dataPoints),
+                ),
+                Expanded(
+                  flex: 1, // Adjust the flex factor to control the ratio
+                  child: RealTime(
+                    onTemperatureUpdate: (temperature) {
+                     // print("Received temperature update: $temperature");
+                      setState(() {
+                        temp = temperature.toDouble();
+                      });
+                    },
+                  ),
+                ),
+              ],
+            ),
           );
         },
       ),

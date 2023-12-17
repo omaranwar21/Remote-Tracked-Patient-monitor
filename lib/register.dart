@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:io';
+import 'package:csv/csv.dart';
+import 'package:path_provider/path_provider.dart';
+
 
 class MyRegister extends StatefulWidget {
   const MyRegister({Key? key}) : super(key: key);
@@ -11,6 +15,8 @@ class MyRegister extends StatefulWidget {
 class _MyRegisterState extends State<MyRegister> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _roleController     = TextEditingController();
+  final TextEditingController _nameController     = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +57,8 @@ class _MyRegisterState extends State<MyRegister> {
               children: [
                 buildNameTextField(),
                 SizedBox(height: 30),
+                buildRoleTextField(),
+                SizedBox(height: 30),
                 buildEmailTextField(),
                 SizedBox(height: 30),
                 buildPasswordTextField(),
@@ -78,6 +86,25 @@ class _MyRegisterState extends State<MyRegister> {
 
   Widget buildNameTextField() {
     return TextField(
+      controller: _nameController,
+      decoration: InputDecoration(
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(color: Colors.black),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(color: Colors.white),
+        ),
+        hintText: 'Name',
+        hintStyle: const TextStyle(color: Colors.white),
+      ),
+    );
+  }
+
+    Widget buildRoleTextField() {
+    return TextField(
+      controller: _roleController,
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -179,25 +206,50 @@ class _MyRegisterState extends State<MyRegister> {
     );
   }
 
-  void signInWithEmailAndPassword() async {
-  try {
-    final String email = _emailController.text.trim();
-    final String password = _passwordController.text.trim();
+   void signInWithEmailAndPassword() async {
+    try {
+      final String email = _emailController.text.trim();
+      final String password = _passwordController.text.trim();
+      final String nameText = _nameController.text.trim();
+      final String roleText = _roleController.text.trim();
 
-    if (email.isNotEmpty && password.isNotEmpty) {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      if (email.isNotEmpty && password.isNotEmpty) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
 
-      // Registration successful, navigate to the next screen
-    } else {
-      // Display an error message or handle empty email/password fields
+        // Registration successful, save data to CSV
+        saveToCSV(nameText, roleText);
+
+        // Navigate to the next screen
+        Navigator.pushNamed(context, 'login');
+      } else {
+        // Display an error message or handle empty email/password fields
+      }
+    } catch (e) {
+      // Display an error message or handle the authentication error
+      print('Registration failed: $e');
     }
-  } catch (e) {
-    // Display an error message or handle the authentication error
-    print('Registration failed: $e');
   }
- }
+
+  void saveToCSV(String name, String role) async {
+    List<List<dynamic>> rows = [];
+    rows.add(['Name', 'Role']); // CSV header
+    rows.add([name, role]); // Data
+
+    String csvContent = const ListToCsvConverter().convert(rows);
+
+    // Get the directory where the CSV file will be stored
+    Directory directory = await getApplicationDocumentsDirectory();
+    String filePath = '${directory.path}/user_data.csv';
+
+    // Write the CSV content to the file
+    File file = File(filePath);
+    await file.writeAsString(csvContent);
+
+    print('CSV file saved: $filePath');
+  }
+  
 }
 

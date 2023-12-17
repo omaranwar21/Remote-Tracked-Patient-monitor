@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'realtime.dart';
 
 class Ploting extends StatelessWidget {
   const Ploting({
@@ -47,7 +48,7 @@ class Ploting extends StatelessWidget {
         minX: (dataCount.toDouble()-20),
         maxX: dataCount.toDouble(),
         minY: 0,
-        maxY: 20,
+        maxY: 99,
         lineBarsData: [
           LineChartBarData(
             spots:

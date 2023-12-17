@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int spo2 = 0;
+  bool notifyFlg = true;
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +47,12 @@ class _HomePageState extends State<HomePage> {
                     setState(() {
                       spo2 = temperature;
 
-                      if (spo2 > 40){
+                      if (spo2 > 40 && notifyFlg) {
+                        notifyFlg = false;
                         showNotification();
+                      }
+                      else{
+                        notifyFlg = true;
                       }
                     });
                   },

@@ -45,7 +45,7 @@ Future main() async {
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: 'plot',
+        initialRoute: 'register',
         routes: {
           'login': (context) => const MyLogin(),
           'register': (context) => const MyRegister(),

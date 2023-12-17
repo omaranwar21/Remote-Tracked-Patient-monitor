@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:csv/csv.dart';
 import 'package:path_provider/path_provider.dart';
 
-
 class MyRegister extends StatefulWidget {
   const MyRegister({Key? key}) : super(key: key);
 
@@ -15,8 +14,8 @@ class MyRegister extends StatefulWidget {
 class _MyRegisterState extends State<MyRegister> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _roleController     = TextEditingController();
-  final TextEditingController _nameController     = TextEditingController();
+  final TextEditingController _roleController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +101,7 @@ class _MyRegisterState extends State<MyRegister> {
     );
   }
 
-    Widget buildRoleTextField() {
+  Widget buildRoleTextField() {
     return TextField(
       controller: _roleController,
       decoration: InputDecoration(
@@ -206,7 +205,7 @@ class _MyRegisterState extends State<MyRegister> {
     );
   }
 
-   void signInWithEmailAndPassword() async {
+  void signInWithEmailAndPassword() async {
     try {
       final String email = _emailController.text.trim();
       final String password = _passwordController.text.trim();
@@ -234,22 +233,24 @@ class _MyRegisterState extends State<MyRegister> {
   }
 
   void saveToCSV(String name, String role) async {
-    List<List<dynamic>> rows = [];
-    rows.add(['Name', 'Role']); // CSV header
-    rows.add([name, role]); // Data
+    try {
+      List<List<dynamic>> rows = [];
+      rows.add(['Name', 'Role']); // CSV header
+      rows.add([name, role]); // Data
 
-    String csvContent = const ListToCsvConverter().convert(rows);
+      String csvContent = const ListToCsvConverter().convert(rows);
 
-    // Get the directory where the CSV file will be stored
-    Directory directory = await getApplicationDocumentsDirectory();
-    String filePath = '${directory.path}/user_data.csv';
+      // Get the directory where the CSV file will be stored
+      Directory directory = await getApplicationDocumentsDirectory();
+      String filePath = '${directory.path}/user_data.csv';
 
-    // Write the CSV content to the file
-    File file = File(filePath);
-    await file.writeAsString(csvContent);
+      // Write the CSV content to the file
+      File file = File(filePath);
+      await file.writeAsString(csvContent);
 
-    print('CSV file saved: $filePath');
+      print('CSV file saved: $filePath');
+    } catch (e) {
+      print('Error saving CSV: $e');
+    }
   }
-  
 }
-

@@ -3,6 +3,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'customBar.dart';
 import 'customDrawer.dart';
 import 'realtime.dart';
+import 'notification.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -44,6 +45,10 @@ class _HomePageState extends State<HomePage> {
                     // Update the spo2 value directly
                     setState(() {
                       spo2 = temperature;
+
+                      if (spo2 > 40){
+                        showNotification();
+                      }
                     });
                   },
                 ),

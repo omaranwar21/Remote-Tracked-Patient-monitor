@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'login.dart';
 import 'register.dart';
 import 'reset_password.dart';
 import 'homepage.dart';
 import 'plot.dart';
+import 'notification.dart';
 
-void main() async {
+
+// Notification received in the background
+Future<void> _firebaseMessagingBackgroundHandler(
+    RemoteMessage message) async {
+  await Firebase.initializeApp();
+}
+
+
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: const FirebaseOptions(
@@ -17,16 +28,31 @@ void main() async {
     databaseURL: 'https://smarticu-c78aa-default-rtdb.firebaseio.com/',
     ),
   );
+  // for background handler
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
+
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: 'plot',
+        initialRoute: 'home',
         routes: {
           'login': (context) => const MyLogin(),
           'register': (context) => const MyRegister(),
           'reset_password': (context) => const ResetPasswordPage(),
           'home': (context) => const HomePage(),
           'plot': (context) => const RealTimePlotting(),
+          'noti':(context) =>  const MyApp(),
         }),
   );
 }

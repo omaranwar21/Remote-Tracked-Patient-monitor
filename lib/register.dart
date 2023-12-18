@@ -113,7 +113,7 @@ class _MyRegisterState extends State<MyRegister> {
           borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(color: Colors.white),
         ),
-        hintText: 'Name',
+        hintText: 'Role',
         hintStyle: const TextStyle(color: Colors.white),
       ),
     );

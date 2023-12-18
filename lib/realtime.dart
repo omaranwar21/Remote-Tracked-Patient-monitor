@@ -3,8 +3,13 @@ import 'package:firebase_database/firebase_database.dart';
 
 class RealTime extends StatefulWidget {
   final void Function(int temperature) onTemperatureUpdate;
+  // final void Function(String key, dynamic value) uploadDataCallback;
 
-  const RealTime({Key? key, required this.onTemperatureUpdate}) : super(key: key);
+  const RealTime({
+    Key? key,
+    required this.onTemperatureUpdate,
+    // required this.uploadDataCallback,
+  }) : super(key: key);
 
   @override
   State<RealTime> createState() => _RealTimeState();
@@ -12,6 +17,7 @@ class RealTime extends StatefulWidget {
 
 class _RealTimeState extends State<RealTime> {
   DatabaseReference dbRef = FirebaseDatabase.instance.ref("RealData");
+  // DatabaseReference newDataRef = FirebaseDatabase.instance.ref("RealData/control");
   int? temperature;
 
   @override
@@ -30,6 +36,8 @@ class _RealTimeState extends State<RealTime> {
         final Map<dynamic, dynamic>? dataMap =
             snapshot.data!.snapshot.value as Map<dynamic, dynamic>?;
 
+
+
         if (dataMap == null) {
           return const Center(child: Text('Data is null'));
         }
@@ -43,10 +51,17 @@ class _RealTimeState extends State<RealTime> {
           }
         });
 
+        // dataMap.forEach((key, value) {
+        //   widget.uploadDataCallback(key, value);
+        // });
+
+        // newDataRef.set(1);
+
         return Center(
           child: Container(),
         );
       },
     );
   }
+
 }

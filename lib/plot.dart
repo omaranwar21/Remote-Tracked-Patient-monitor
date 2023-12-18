@@ -41,7 +41,7 @@ class RealTimePlottingState extends State<RealTimePlotting> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: "Real-time Plotting"),
-      drawer: const CustomDrawer(),
+      drawer: CustomDrawer(),
       body: LayoutBuilder(
         builder: (context, constraints) {
           return Padding(

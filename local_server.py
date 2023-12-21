@@ -14,7 +14,11 @@ config = {
 
 firebase = pyrebase.initialize_app(config)
 
+# firebase.
+
 storage = firebase.storage()
+
+
 
 path_on_cloud = "ecg_file.csv"
 path_local = "./"

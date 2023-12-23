@@ -5,7 +5,7 @@ class MyLogin extends StatefulWidget {
   const MyLogin({Key? key}) : super(key: key);
 
   @override
-  _MyLoginState createState() => _MyLoginState();
+  State<MyLogin> createState() => _MyLoginState();
 }
 
 class _MyLoginState extends State<MyLogin> {
@@ -17,7 +17,7 @@ class _MyLoginState extends State<MyLogin> {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('../assets/images/login.png'),
+          image: AssetImage('assets/images/login.png'),
           fit: BoxFit.cover,
         ),
       ),
@@ -115,7 +115,7 @@ class _MyLoginState extends State<MyLogin> {
             onPressed: () {
               signInWithEmailAndPassword();
             },
-            icon: Icon(Icons.arrow_forward),
+            icon: const Icon(Icons.arrow_forward),
           ),
         ),
       ],
@@ -158,27 +158,26 @@ class _MyLoginState extends State<MyLogin> {
   }
 
   void signInWithEmailAndPassword() async {
-  try {
-    final String email = _emailController.text.trim();
-    final String password = _passwordController.text.trim();
+    try {
+      final String email = _emailController.text.trim();
+      final String password = _passwordController.text.trim();
 
-    if (email.isNotEmpty && password.isNotEmpty) {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      // Authentication successful
-      print('Sign in successful');
+      if (email.isNotEmpty && password.isNotEmpty) {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+        // Authentication successful
+        print('Sign in successful');
 
-      // navigate to the next screen
-      Navigator.pushNamed(context, 'home');
-      
-    } else {
-      // Display an error message or handle empty email/password fields
+        // navigate to the next screen
+        Navigator.pushNamed(context, 'home');
+      } else {
+        // Display an error message or handle empty email/password fields
+      }
+    } catch (e) {
+      // Display an error message or handle the authentication error
+      print('Sign in failed: $e');
     }
-  } catch (e) {
-    // Display an error message or handle the authentication error
-    print('Sign in failed: $e');
   }
-}
 }

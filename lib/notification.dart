@@ -33,7 +33,7 @@ void showNotification() {
         channel.name,
         channelDescription: channel.description,
         importance: Importance.high,
-        color: Color.fromARGB(255, 65, 35, 238),
+        color: const Color.fromARGB(255, 65, 35, 238),
         playSound: true,
         icon: '@mipmap/ic_launcher',
       ),
@@ -57,12 +57,12 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, this.title}) : super(key: key);
+  const MyHomePage({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -94,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
               channel.id,
               channel.name,
               channelDescription: channel.description,
-              color: Color.fromARGB(255, 168, 17, 17),
+              color: const Color.fromARGB(255, 168, 17, 17),
               playSound: true,
               icon: '@mipmap/ic_launcher',
             ),
@@ -163,10 +163,10 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: const FloatingActionButton(
         onPressed: showNotification,
         tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        child: Icon(Icons.add),
       ),
     );
   }

@@ -1,14 +1,15 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'realtime.dart';
 
 class Ploting extends StatelessWidget {
   const Ploting({
     super.key,
     required this.dataCount,
     required this.dataPoints,
+    required this.maximumY,
   });
 
+  final double maximumY;
   final int dataCount;
   final List<FlSpot> dataPoints;
 
@@ -45,18 +46,17 @@ class Ploting extends StatelessWidget {
             width: 1,
           ),
         ),
-        minX: (dataCount.toDouble()-20),
+        minX: (dataCount.toDouble() - 20),
         maxX: dataCount.toDouble(),
         minY: 0,
-        maxY: 99,
+        maxY: maximumY,
         lineBarsData: [
           LineChartBarData(
-            spots:
-                dataPoints.getRange(0, dataPoints.length - 1).toList(),
+            spots: dataPoints.getRange(0, dataPoints.length - 1).toList(),
             isCurved: true,
             colors: [const Color(0xff31304D)],
-            belowBarData: BarAreaData(
-                show: true, colors: [const Color(0xffB6BBC4)]),
+            belowBarData:
+                BarAreaData(show: true, colors: [const Color(0xffB6BBC4)]),
           ),
         ],
       ),

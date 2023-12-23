@@ -1,6 +1,7 @@
 // ignore: file_names
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'realtime.dart';
+import 'package:patient_monitor/pages/plot.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({
@@ -8,14 +9,15 @@ class CustomDrawer extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CustomDrawerState createState() => _CustomDrawerState();
+  State<CustomDrawer> createState() => _CustomDrawerState();
 }
 
 class _CustomDrawerState extends State<CustomDrawer> {
   bool buttonFlag = false;
   String buttonText = "Channel OFF";
+  DatabaseReference controlDbRef =
+      FirebaseDatabase.instance.ref("RealData/control");
 
-  
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -41,7 +43,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 onTap: () {
                   // Handle sidebar item 1 tap
                   Navigator.pop(context); // Close the sidebar
-                  Navigator.pushNamed(context, 'plot');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const RealTimePlotting()));
                 },
               ),
               ListTile(
@@ -50,6 +55,20 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   // Handle sidebar item 2 tap
                   Navigator.pop(context); // Close the sidebar
                   Navigator.pushNamed(context, 'home');
+                },
+              ),
+              ListTile(
+                title: const Text('Open Camera'),
+                onTap: () {
+                  // Handle sidebar item 4 tap
+                  Navigator.pushReplacementNamed(context, 'camera');
+                },
+              ),
+              ListTile(
+                title: const Text('ECG Monitor'),
+                onTap: () {
+                  // Handle sidebar item 4 tap
+                  Navigator.pushReplacementNamed(context, 'ecg');
                 },
               ),
               ListTile(
@@ -83,6 +102,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     buttonText = "Channel OFF";
                     buttonFlag = false;
                   }
+                  controlDbRef.set(buttonFlag);
                 });
               },
               child: Text(buttonText),

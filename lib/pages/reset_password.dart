@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:patient_monitor/customBar.dart';
+import 'package:patient_monitor/widgets/customBar.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({Key? key}) : super(key: key);
 
   @override
-  _ResetPasswordPageState createState() => _ResetPasswordPageState();
+  State<ResetPasswordPage> createState() => _ResetPasswordPageState();
 }
 
 class _ResetPasswordPageState extends State<ResetPasswordPage> {
@@ -32,7 +32,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
               onPressed: () {
                 resetPassword();
                 Navigator.pushNamed(context, 'login');
-                },
+              },
               child: const Text('Reset Password'),
             ),
           ],

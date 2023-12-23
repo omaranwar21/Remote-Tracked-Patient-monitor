@@ -8,7 +8,7 @@ class MyRegister extends StatefulWidget {
   const MyRegister({Key? key}) : super(key: key);
 
   @override
-  _MyRegisterState createState() => _MyRegisterState();
+  State<MyRegister> createState() => _MyRegisterState();
 }
 
 class _MyRegisterState extends State<MyRegister> {
@@ -22,7 +22,7 @@ class _MyRegisterState extends State<MyRegister> {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('../assets/images/register.png'),
+          image: AssetImage('assets/images/register.png'),
           fit: BoxFit.cover,
         ),
       ),
@@ -55,15 +55,15 @@ class _MyRegisterState extends State<MyRegister> {
             child: Column(
               children: [
                 buildNameTextField(),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 buildRoleTextField(),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 buildEmailTextField(),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 buildPasswordTextField(),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 buildSignInButton(),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 buildLoginOption(),
               ],
             ),

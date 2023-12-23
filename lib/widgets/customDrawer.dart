@@ -43,10 +43,15 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 onTap: () {
                   // Handle sidebar item 1 tap
                   Navigator.pop(context); // Close the sidebar
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const RealTimePlotting()));
+                  Navigator.pushNamed(context, 'plot');
+                },
+              ),
+              ListTile(
+                title: const Text('Plot 2'),
+                onTap: () {
+                  // Handle sidebar item 1 tap
+                  Navigator.pop(context); // Close the sidebar
+                  Navigator.pushNamed(context, 'plot2');
                 },
               ),
               ListTile(
@@ -64,13 +69,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   Navigator.pushReplacementNamed(context, 'camera');
                 },
               ),
-              ListTile(
-                title: const Text('ECG Monitor'),
-                onTap: () {
-                  // Handle sidebar item 4 tap
-                  Navigator.pushReplacementNamed(context, 'ecg');
-                },
-              ),
+              // ListTile(
+              //   title: const Text('ECG Monitor'),
+              //   onTap: () {
+              //     // Handle sidebar item 4 tap
+              //     Navigator.pushReplacementNamed(context, 'ecg');
+              //   },
+              // ),
               ListTile(
                 title: const Text('Sign Out'),
                 onTap: () {

@@ -67,6 +67,7 @@ class _CsvPlotPageState extends State<CsvPlotPage> {
                 child: Ploting(
                   dataCount: csvData.length,
                   dataPoints: _getFlSpots(),
+                  palet: [],
                   maximumY: 0.5,
                 ),
               ),
@@ -82,12 +83,12 @@ class _CsvPlotPageState extends State<CsvPlotPage> {
 
     return csvData.asMap().entries.map((entry) {
       if (entry.value.isNotEmpty) {
-        print("//////////////");
+        // print("//////////////");
 
         return FlSpot(entry.key.toDouble(), entry.value[0].toDouble());
       } else {
         // Handle the case where the entry doesn't have enough elements
-        print("****************");
+        // print("****************");
         return FlSpot(entry.key.toDouble(), 0.0);
       }
     }).toList();

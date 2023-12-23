@@ -7,10 +7,16 @@ import 'package:patient_monitor/widgets/customDrawer.dart';
 import 'package:patient_monitor/widgets/ploting.dart';
 
 class RealTimePlotting extends StatefulWidget {
-  const RealTimePlotting({Key? key, this.chosneData = "Temperature"})
-      : super(key: key);
+  const RealTimePlotting({
+    Key? key,
+    required this.chosneData,
+    required this.textTitle,
+    required this.palet
+  }) : super(key: key);
 
   final String chosneData;
+  final String textTitle;
+  final List<Color> palet;
 
   @override
   RealTimePlottingState createState() => RealTimePlottingState();
@@ -21,7 +27,7 @@ class RealTimePlottingState extends State<RealTimePlotting> {
 
   List<FlSpot> dataPoints = [const FlSpot(0, 0)];
   int dataCount = 0;
-  late int dataValue; // Declare temp variable
+  late int dataValue;
 
   @override
   void initState() {
@@ -39,7 +45,7 @@ class RealTimePlottingState extends State<RealTimePlotting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Real-time Plotting"),
+      appBar: CustomAppBar(title: widget.textTitle),
       drawer: const CustomDrawer(),
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -56,7 +62,12 @@ class RealTimePlottingState extends State<RealTimePlotting> {
                       .add(FlSpot(dataCount.toDouble(), dataValue.toDouble()));
                   dataCount++;
 
-                  return Ploting(dataCount: dataCount, dataPoints: dataPoints, maximumY: 99);
+                  return Ploting(
+                    dataCount: dataCount,
+                    dataPoints: dataPoints,
+                    maximumY: 99,
+                    palet: widget.palet
+                  );
                 } else if (snapshot.hasError) {
                   return Center(
                     child: Text(snapshot.error.toString()),

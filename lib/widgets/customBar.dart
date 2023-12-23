@@ -18,6 +18,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         builder: (BuildContext context) {
           return IconButton(
             icon: const Icon(Icons.medical_services),
+            color: Colors.white,
             iconSize: 80,
             onPressed: () {
               Scaffold.of(context).openDrawer();
@@ -28,7 +29,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       title: Padding(
         padding: const EdgeInsets.only(left: 20),
-        child: Text(title),
+        child: Text(title, style: const TextStyle(color: Colors.white)),
       ),
     );
   }

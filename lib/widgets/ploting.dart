@@ -2,16 +2,17 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class Ploting extends StatelessWidget {
-  const Ploting({
-    super.key,
-    required this.dataCount,
-    required this.dataPoints,
-    required this.maximumY,
-  });
+  const Ploting(
+      {super.key,
+      required this.dataCount,
+      required this.dataPoints,
+      required this.maximumY,
+      required this.palet});
 
   final double maximumY;
   final int dataCount;
   final List<FlSpot> dataPoints;
+  final List<Color> palet;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class Ploting extends StatelessWidget {
         borderData: FlBorderData(
           show: true,
           border: Border.all(
-            color: const Color(0xff161A30),
+            color: palet[0],
             width: 1,
           ),
         ),
@@ -54,9 +55,9 @@ class Ploting extends StatelessWidget {
           LineChartBarData(
             spots: dataPoints.getRange(0, dataPoints.length - 1).toList(),
             isCurved: true,
-            colors: [const Color(0xff31304D)],
+            colors: [palet[1]],
             belowBarData:
-                BarAreaData(show: true, colors: [const Color(0xffB6BBC4)]),
+                BarAreaData(show: true, colors: [palet[2]]),
           ),
         ],
       ),

@@ -45,16 +45,28 @@ void main() async {
     MaterialApp(
         debugShowCheckedModeBanner: false,
         // initialRoute: 'register',
-        initialRoute: 'ecg',
+        initialRoute: 'plot',
         routes: {
           'login': (context) => const MyLogin(),
           'register': (context) => const MyRegister(),
           'reset_password': (context) => const ResetPasswordPage(),
           'home': (context) => const HomePage(),
-          'plot': (context) => const RealTimePlotting(),
+          'plot': (context) => const RealTimePlotting(
+              chosneData: "Temperature",
+              textTitle: "Real-Time Plotting",
+              palet: [Color(0xff161A30), Color(0xff31304D), Color(0xffB6BBC4)]),
           'noti': (context) => const MyApp(),
           "camera": (context) => const CameraPage(),
-          "ecg": (context) => const CsvPlotPage()
+          // "ecg": (context) => const CsvPlotPage(),
+          "plot2": (context) => const RealTimePlotting(
+                chosneData: "Temperature",
+                textTitle: "plot2",
+                palet: [
+                  Color(0xff392467),
+                  Color(0xffA367B1),
+                  Color(0xffFFD1E3)
+                ],
+              ),
         }),
   );
 }

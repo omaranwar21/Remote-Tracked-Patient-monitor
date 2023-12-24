@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "771972734729",
+    "firebase_url": "https://smarticu-c78aa-default-rtdb.firebaseio.com",
+    "project_id": "smarticu-c78aa",
+    "storage_bucket": "smarticu-c78aa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771972734729:android:6779c6f56ef914d1747dd8",
+        "android_client_info": {
+          "package_name": "com.example.noti"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBedb_YI8cEEahX0ymhF5ojcmhIGMwAP5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771972734729:android:1ad79451bffcf413747dd8",
+        "android_client_info": {
+          "package_name": "com.example.patient_monitor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBedb_YI8cEEahX0ymhF5ojcmhIGMwAP5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

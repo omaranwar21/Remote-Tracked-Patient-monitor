@@ -25,6 +25,7 @@ void main() async {
       messagingSenderId: '771972734729', // Your messagingSenderId
       projectId: 'smarticu-c78aa', // Your projectId
       databaseURL: 'https://smarticu-c78aa-default-rtdb.firebaseio.com/',
+      storageBucket: "smarticu-c78aa.appspot.com",
     ),
   );
   // for background handler
@@ -45,7 +46,7 @@ void main() async {
     MaterialApp(
         debugShowCheckedModeBanner: false,
         // initialRoute: 'register',
-        initialRoute: 'plot',
+        initialRoute: 'ecg',
         routes: {
           'login': (context) => const MyLogin(),
           'register': (context) => const MyRegister(),
@@ -57,7 +58,7 @@ void main() async {
               palet: [Color(0xff161A30), Color(0xff31304D), Color(0xffB6BBC4)]),
           'noti': (context) => const MyApp(),
           "camera": (context) => const CameraPage(),
-          // "ecg": (context) => const CsvPlotPage(),
+          "ecg": (context) => const CsvPlotPage(),
           "plot2": (context) => const RealTimePlotting(
                 chosneData: "Temperature",
                 textTitle: "plot2",
